@@ -65,7 +65,7 @@ export function PortfolioHero() {
           {/* Social Links */}
           <div className="flex justify-center gap-4">
             <a
-              href="https://github.com"
+              href="https://github.com/Ti28282"
               target="_blank"
               rel="noopener noreferrer"
               className="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-blue-600 dark:hover:bg-blue-600 text-gray-700 dark:text-gray-300 hover:text-white flex items-center justify-center transition-all"

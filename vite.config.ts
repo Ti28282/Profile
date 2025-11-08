@@ -54,9 +54,6 @@
       outDir: 'build',
     },
     server: {
-      allowedHosts: [
-      '2137d00ecf79.ngrok-free.app'
-      ],
       port: 3000,
       open: true,
     },
