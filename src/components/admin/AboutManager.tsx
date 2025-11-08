@@ -4,7 +4,7 @@ import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { Textarea } from '../ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import { Save } from 'lucide-react';
+import { Save, Upload } from 'lucide-react';
 import { useAdmin } from '../../contexts/AdminContext';
 import { toast } from 'sonner@2.0.3';
 
@@ -13,6 +13,7 @@ export function AboutManager() {
   const [formData, setFormData] = useState({
     name: aboutData.name,
     age: aboutData.age,
+    profilePhoto: aboutData.profilePhoto,
     paragraph1: aboutData.description[0] || '',
     paragraph2: aboutData.description[1] || '',
     paragraph3: aboutData.description[2] || '',
@@ -28,6 +29,7 @@ export function AboutManager() {
     const updatedData = {
       name: formData.name,
       age: formData.age,
+      profilePhoto: formData.profilePhoto,
       description: [
         formData.paragraph1,
         formData.paragraph2,
@@ -50,7 +52,7 @@ export function AboutManager() {
       <div>
         <h1 className="text-gray-900 dark:text-white mb-2">Редактирование раздела "О себе"</h1>
         <p className="text-gray-600 dark:text-gray-400">
-          Обновите информацию о себе и статистику
+          Обновите информацию о себе, фото профиля и статистику
         </p>
       </div>
 
@@ -81,6 +83,38 @@ export function AboutManager() {
                   required
                 />
               </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="profilePhoto">
+                <div className="flex items-center gap-2">
+                  <Upload className="w-4 h-4" />
+                  URL фото профиля
+                </div>
+              </Label>
+              <Input
+                id="profilePhoto"
+                type="url"
+                value={formData.profilePhoto}
+                onChange={(e) => setFormData({ ...formData, profilePhoto: e.target.value })}
+                placeholder="https://example.com/photo.jpg"
+              />
+              {formData.profilePhoto && (
+                <div className="mt-4">
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">Предпросмотр:</p>
+                  <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-gray-200 dark:border-gray-700">
+                    <img
+                      src={formData.profilePhoto}
+                      alt="Preview"
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.currentTarget.src = '';
+                        e.currentTarget.style.display = 'none';
+                      }}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="space-y-2">

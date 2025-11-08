@@ -1,145 +1,115 @@
-import { Card } from "../ui/card";
-import { Badge } from "../ui/badge";
-import { Button } from "../ui/button";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { ExternalLink, Github } from "lucide-react";
-
-const projects = [
-  {
-    id: 1,
-    title: "REST API для E-Commerce",
-    description: "Масштабируемый backend с микросервисной архитектурой, обработкой платежей и системой уведомлений",
-    image: "https://images.unsplash.com/photo-1596167175550-19b780c8b461?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcGklMjBkZXZlbG9wbWVudCUyMGJhY2tlbmR8ZW58MXx8fHwxNzYwODc4MjU3fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    tags: ["Python", "FastAPI", "PostgreSQL", "Redis"],
-    liveUrl: "#",
-    githubUrl: "#"
-  },
-  {
-    id: 2,
-    title: "Система аналитики данных",
-    description: "Backend для обработки и анализа больших объемов данных с real-time агрегацией",
-    image: "https://images.unsplash.com/photo-1620722664104-d4b8a0c5b556?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkYXRhYmFzZSUyMHBvc3RncmVzcWx8ZW58MXx8fHwxNzYwODc4MjU3fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    tags: ["Python", "Django", "PostgreSQL", "Celery"],
-    liveUrl: "#",
-    githubUrl: "#"
-  },
-  {
-    id: 3,
-    title: "Микросервисная архитектура",
-    description: "Распределенная система из 6+ микросервисов с message broker и service discovery",
-    image: "https://images.unsplash.com/photo-1676030789467-a097e2291bb2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtaWNyb3NlcnZpY2VzJTIwYXJjaGl0ZWN0dXJlfGVufDF8fHx8MTc2MDg3ODI1N3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    tags: ["Python", "Docker", "RabbitMQ", "Kubernetes"],
-    liveUrl: "#",
-    githubUrl: "#"
-  },
-  {
-    id: 4,
-    title: "Облачная инфраструктура",
-    description: "Настройка CI/CD pipeline, мониторинга и автоматизации развертывания",
-    image: "https://images.unsplash.com/photo-1667984390553-7f439e6ae401?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjbG91ZCUyMHNlcnZlciUyMGluZnJhc3RydWN0dXJlfGVufDF8fHx8MTc2MDg3ODI1OHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    tags: ["Docker", "GitLab CI", "Nginx", "Prometheus"],
-    liveUrl: "#",
-    githubUrl: "#"
-  },
-  {
-    id: 5,
-    title: "API Gateway с аутентификацией",
-    description: "Централизованный шлюз с JWT, OAuth2 и rate limiting для микросервисов",
-    image: "https://images.unsplash.com/photo-1667372531881-6f975b1c86db?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxweXRob24lMjBwcm9ncmFtbWluZyUyMGNvZGV8ZW58MXx8fHwxNzYwNzk0NzM3fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    tags: ["Python", "FastAPI", "JWT", "Redis"],
-    liveUrl: "#",
-    githubUrl: "#"
-  },
-  {
-    id: 6,
-    title: "Admin панель для управления",
-    description: "Полноценная админ панель с React frontend и Python backend для управления системой",
-    image: "https://images.unsplash.com/photo-1615285307672-09b361d7c61a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZXZlbG9wZXIlMjB3b3Jrc3BhY2UlMjBzZXR1cHxlbnwxfHx8fDE3NjA3NzA4MjJ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    tags: ["React", "Python", "PostgreSQL", "WebSockets"],
-    liveUrl: "#",
-    githubUrl: "#"
-  }
-];
+import { useAdmin } from "../../contexts/AdminContext";
+import { motion } from 'motion/react';
+import { useInView } from 'motion/react';
+import { useRef } from 'react';
 
 export function Projects() {
+  const { projects } = useAdmin();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
+
   return (
     <section
       id="projects"
-      className="py-20 bg-white dark:bg-gray-900 transition-colors"
+      ref={ref}
+      className="py-24 bg-gray-50 dark:bg-gray-900 transition-colors"
     >
-      <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto">
+      <div className="container mx-auto px-6">
+        <div className="max-w-5xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-16">
-            <h2 className="mb-4 text-gray-900 dark:text-white">Проекты</h2>
-            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Backend проекты и архитектурные решения. От REST API до микросервисных систем.
-            </p>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6 }}
+            className="mb-12"
+          >
+            <h2 className="mb-4 text-gray-900 dark:text-white">Работы</h2>
+            <motion.div
+              className="w-12 h-0.5 bg-gray-900 dark:bg-white"
+              initial={{ width: 0 }}
+              animate={isInView ? { width: 48 } : { width: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            />
+          </motion.div>
 
           {/* Projects Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project) => (
-              <Card
+          <div className="grid md:grid-cols-2 gap-8">
+            {projects.map((project, index) => (
+              <motion.div
                 key={project.id}
-                className="overflow-hidden group hover:shadow-2xl transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700"
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                whileHover={{ y: -8 }}
+                className="group bg-white dark:bg-gray-950 border border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 transition-all overflow-hidden"
               >
                 {/* Image */}
-                <div className="relative h-48 overflow-hidden bg-gray-200 dark:bg-gray-700">
+                <div className="relative h-56 overflow-hidden bg-gray-100 dark:bg-gray-800">
                   <ImageWithFallback
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4 gap-3">
-                    <Button
-                      size="sm"
-                      variant="secondary"
-                      className="gap-2"
-                      asChild
-                    >
-                      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="w-4 h-4" />
-                        Live
-                      </a>
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="secondary"
-                      className="gap-2"
-                      asChild
-                    >
-                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                        <Github className="w-4 h-4" />
-                        Code
-                      </a>
-                    </Button>
-                  </div>
+                  
+                  {/* Overlay with links */}
+                  <motion.div
+                    className="absolute inset-0 bg-gray-900/80 flex items-center justify-center gap-4"
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {project.liveUrl && project.liveUrl !== '#' && (
+                      <motion.a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-10 h-10 rounded-full bg-white text-gray-900 flex items-center justify-center"
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        whileTap={{ scale: 0.9 }}
+                      >
+                        <ExternalLink className="w-5 h-5" />
+                      </motion.a>
+                    )}
+                    {project.githubUrl && project.githubUrl !== '#' && (
+                      <motion.a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-10 h-10 rounded-full bg-white text-gray-900 flex items-center justify-center"
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        whileTap={{ scale: 0.9 }}
+                      >
+                        <Github className="w-5 h-5" />
+                      </motion.a>
+                    )}
+                  </motion.div>
                 </div>
 
                 {/* Content */}
                 <div className="p-6">
-                  <h3 className="mb-2 text-gray-900 dark:text-white">
+                  <h3 className="text-gray-900 dark:text-white mb-2">
                     {project.title}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
                     {project.description}
                   </p>
 
                   {/* Tags */}
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag, idx) => (
-                      <Badge
+                      <span
                         key={idx}
-                        variant="secondary"
-                        className="text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border-0"
+                        className="text-sm text-gray-500 dark:text-gray-400"
                       >
                         {tag}
-                      </Badge>
+                        {idx < project.tags.length - 1 && ' •'}
+                      </span>
                     ))}
                   </div>
                 </div>
-              </Card>
+              </motion.div>
             ))}
           </div>
         </div>

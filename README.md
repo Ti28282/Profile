@@ -1,7 +1,13 @@
+# Портфолио Backend разработчика
 
-  ## Running the code
+Персональное портфолио
 
-  Run `npm i` to install the dependencies.
 
-  Run `npm run dev` to start the development server.
+
+- **Портфолио**: Современный одностраничный сайт с разделами:
+  - О себе
+  - Навыки и технологии
+  - Проекты
+  - Контакты
   
+

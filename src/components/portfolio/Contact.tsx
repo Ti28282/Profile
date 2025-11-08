@@ -1,9 +1,12 @@
-import { Card } from "../ui/card";
+import { useState, useRef } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
-import { Mail, MapPin, Phone, Send } from "lucide-react";
-import { useState } from "react";
+import { toast } from "sonner@2.0.3";
+import { Mail, Github, Linkedin } from "lucide-react";
+import { motion } from 'motion/react';
+import { useInView } from 'motion/react';
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -11,165 +14,161 @@ export function Contact() {
     email: "",
     message: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log("Form submitted:", formData);
-    alert("Спасибо за сообщение! Я свяжусь с вами в ближайшее время.");
-    setFormData({ name: "", email: "", message: "" });
-  };
+    setIsSubmitting(true);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1500));
+
+    toast.success("Сообщение отправлено!");
+    setFormData({ name: "", email: "", message: "" });
+    setIsSubmitting(false);
   };
 
   return (
     <section
       id="contact"
-      className="py-20 bg-gray-50 dark:bg-gray-800 transition-colors"
+      ref={ref}
+      className="py-24 bg-white dark:bg-gray-950 transition-colors"
     >
-      <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto">
+      <div className="container mx-auto px-6">
+        <div className="max-w-3xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6 }}
+            className="mb-12"
+          >
             <h2 className="mb-4 text-gray-900 dark:text-white">Контакты</h2>
-            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Нужна помощь с backend разработкой или архитектурой? Давайте обсудим ваш проект
-            </p>
-          </div>
+            <motion.div
+              className="w-12 h-0.5 bg-gray-900 dark:bg-white mb-6"
+              initial={{ width: 0 }}
+              animate={isInView ? { width: 48 } : { width: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            />
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-gray-600 dark:text-gray-400"
+            >
+              Свяжитесь со мной для обсуждения проекта или сотрудничества
+            </motion.p>
+          </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid md:grid-cols-2 gap-12">
             {/* Contact Form */}
-            <Card className="p-8 bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700">
-              <h3 className="mb-6 text-gray-900 dark:text-white">
-                Написать мне
-              </h3>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label className="block text-sm mb-2 text-gray-700 dark:text-gray-300">
-                    Имя
-                  </label>
-                  <Input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Ваше имя"
-                    required
-                    className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm mb-2 text-gray-700 dark:text-gray-300">
-                    Email
-                  </label>
-                  <Input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="your@email.com"
-                    required
-                    className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm mb-2 text-gray-700 dark:text-gray-300">
-                    Сообщение
-                  </label>
-                  <Textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Расскажите о вашем проекте..."
-                    rows={5}
-                    required
-                    className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white resize-none"
-                  />
-                </div>
-                <Button
-                  type="submit"
-                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 gap-2"
-                  size="lg"
-                >
-                  <Send className="w-5 h-5" />
-                  Отправить сообщение
-                </Button>
-              </form>
-            </Card>
+            <motion.form
+              onSubmit={handleSubmit}
+              className="space-y-6"
+              initial={{ opacity: 0, x: -30 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <div>
+                <Label htmlFor="name" className="text-gray-900 dark:text-white">Имя</Label>
+                <Input
+                  id="name"
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="mt-2 bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800"
+                  required
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="email" className="text-gray-900 dark:text-white">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="mt-2 bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800"
+                  required
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="message" className="text-gray-900 dark:text-white">Сообщение</Label>
+                <Textarea
+                  id="message"
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  rows={5}
+                  className="mt-2 bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800"
+                  required
+                />
+              </div>
+
+              <Button
+                type="submit"
+                className="w-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-100"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Отправка..." : "Отправить"}
+              </Button>
+            </motion.form>
 
             {/* Contact Info */}
-            <div className="space-y-6">
+            <motion.div
+              className="space-y-8"
+              initial={{ opacity: 0, x: 30 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+            >
               <div>
-                <h3 className="mb-6 text-gray-900 dark:text-white">
-                  Свяжитесь со мной
+                <h3 className="text-gray-900 dark:text-white mb-4">
+                  Прямые контакты
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-8">
-                  Открыт для обсуждения backend проектов, архитектурных решений 
-                  и возможностей сотрудничества. Всегда рад помочь с технической экспертизой.
-                </p>
-              </div>
-
-              {/* Contact Cards */}
-              <div className="space-y-4">
-                <Card className="p-6 flex items-start gap-4 bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow">
-                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center shrink-0">
-                    <Mail className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="mb-1 text-gray-900 dark:text-white">Email</h4>
-                    <a
-                      href="mailto:example@email.com"
-                      className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                    >
-                      example@email.com
-                    </a>
-                  </div>
-                </Card>
-
-                <Card className="p-6 flex items-start gap-4 bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow">
-                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center shrink-0">
-                    <Phone className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="mb-1 text-gray-900 dark:text-white">Телефон</h4>
-                    <a
-                      href="tel:+79001234567"
-                      className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                    >
-                      +7 (900) 123-45-67
-                    </a>
-                  </div>
-                </Card>
-
-                <Card className="p-6 flex items-start gap-4 bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow">
-                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center shrink-0">
-                    <MapPin className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="mb-1 text-gray-900 dark:text-white">Локация</h4>
-                    <p className="text-gray-600 dark:text-gray-400">
-                      Москва, Россия
-                    </p>
-                  </div>
-                </Card>
-              </div>
-
-              {/* Availability */}
-              <Card className="p-6 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border-blue-200 dark:border-blue-800">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                  <h4 className="text-gray-900 dark:text-white">Открыт к предложениям</h4>
+                <div className="space-y-4">
+                  <motion.a
+                    href="mailto:example@email.com"
+                    className="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                    whileHover={{ x: 5 }}
+                  >
+                    <Mail className="w-5 h-5" />
+                    <span>example@email.com</span>
+                  </motion.a>
+                  <motion.a
+                    href="https://github.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                    whileHover={{ x: 5 }}
+                  >
+                    <Github className="w-5 h-5" />
+                    <span>GitHub</span>
+                  </motion.a>
+                  <motion.a
+                    href="https://linkedin.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                    whileHover={{ x: 5 }}
+                  >
+                    <Linkedin className="w-5 h-5" />
+                    <span>LinkedIn</span>
+                  </motion.a>
                 </div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Рассматриваю интересные backend проекты и консультации. Обычно отвечаю в течение 24 часов.
+              </div>
+
+              <div>
+                <h3 className="text-gray-900 dark:text-white mb-4">
+                  Доступность
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  Открыт для обсуждения новых проектов и возможностей сотрудничества. 
+                  Отвечу в течение 24 часов.
                 </p>
-              </Card>
-            </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>

@@ -1,94 +1,196 @@
 import { Button } from "../ui/button";
-import { Github, Linkedin, Mail, Download, ArrowDown } from "lucide-react";
+import { Github, Linkedin, Mail, ArrowRight } from "lucide-react";
+import { ImageWithFallback } from "../figma/ImageWithFallback";
+import { useAdmin } from "../../contexts/AdminContext";
+import { AnimatedBackground } from "./AnimatedBackground";
+import { motion } from 'motion/react';
 
 export function PortfolioHero() {
-  const scrollToProjects = () => {
-    const element = document.getElementById("projects");
+  const { aboutData } = useAdmin();
+
+  const scrollToContact = () => {
+    const element = document.getElementById("contact");
     element?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <section
       id="hero"
-      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 transition-colors py-20 px-4"
+      className="relative min-h-screen flex items-center justify-center bg-white dark:bg-gray-950 transition-colors pt-20 px-6 overflow-hidden"
     >
-      <div className="container mx-auto max-w-6xl">
-        <div className="text-center">
-          {/* Avatar */}
-          <div className="mb-8 inline-block">
-            <div className="w-32 h-32 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 p-1">
-              <div className="w-full h-full rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-5xl">
-                👨‍💻
-              </div>
+      {/* Animated Background */}
+      <AnimatedBackground />
+
+      {/* Content */}
+      <div className="container mx-auto max-w-4xl relative z-10">
+        <div className="flex flex-col md:flex-row items-center gap-12">
+          {/* Left: Photo */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+            className="relative"
+          >
+            {/* Glow Effect Behind Photo */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-3xl scale-110" />
+            
+            <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-2 border-gray-200 dark:border-gray-800 shadow-2xl">
+              {aboutData.profilePhoto ? (
+                <ImageWithFallback
+                  src={aboutData.profilePhoto}
+                  alt={aboutData.name}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-6xl">
+                  👨‍💻
+                </div>
+              )}
             </div>
-          </div>
 
-          {/* Greeting */}
-          <div className="mb-4">
-            <span className="text-blue-600 dark:text-blue-400">Привет, я</span>
-          </div>
+            {/* Floating Ring Animation */}
+            <motion.div
+              className="absolute inset-0 rounded-full border-2 border-blue-500/30 dark:border-blue-400/30"
+              animate={{
+                scale: [1, 1.1, 1],
+                opacity: [0.3, 0.6, 0.3],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+            />
+            <motion.div
+              className="absolute inset-0 rounded-full border-2 border-purple-500/30 dark:border-purple-400/30"
+              animate={{
+                scale: [1, 1.15, 1],
+                opacity: [0.3, 0.6, 0.3],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: 'easeInOut',
+                delay: 0.5,
+              }}
+            />
+          </motion.div>
 
-          {/* Name */}
-          <h1 className="mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Тимур
-          </h1>
-
-          {/* Title */}
-          <div className="mb-6">
-            <p className="text-2xl md:text-3xl text-gray-700 dark:text-gray-300">
-              Backend разработчик & Архитектор
-            </p>
-          </div>
-
-          {/* Description */}
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8">
-            Проектирую и разрабатываю масштабируемые backend системы. 
-            Специализируюсь на Python, PostgreSQL и REST API архитектуре.
-          </p>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 gap-2"
-              onClick={scrollToProjects}
+          {/* Right: Content */}
+          <div className="flex-1 text-center md:text-left">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="mb-3"
             >
-              Посмотреть проекты
-              <ArrowDown className="w-5 h-5" />
-            </Button>
-            <Button size="lg" variant="outline" className="gap-2">
-              <Download className="w-5 h-5" />
-              Скачать резюме
-            </Button>
-          </div>
+              <span className="text-gray-500 dark:text-gray-400">Backend Developer</span>
+            </motion.div>
 
-          {/* Social Links */}
-          <div className="flex justify-center gap-4">
-            <a
-              href="https://github.com/Ti28282"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-blue-600 dark:hover:bg-blue-600 text-gray-700 dark:text-gray-300 hover:text-white flex items-center justify-center transition-all"
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="mb-4 text-gray-900 dark:text-white"
             >
-              <Github className="w-5 h-5" />
-            </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-blue-600 dark:hover:bg-blue-600 text-gray-700 dark:text-gray-300 hover:text-white flex items-center justify-center transition-all"
+              {aboutData.name}
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="text-gray-600 dark:text-gray-400 mb-6 max-w-xl"
             >
-              <Linkedin className="w-5 h-5" />
-            </a>
-            <a
-              href="mailto:example@email.com"
-              className="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-blue-600 dark:hover:bg-blue-600 text-gray-700 dark:text-gray-300 hover:text-white flex items-center justify-center transition-all"
+              {aboutData.description[0]}
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="flex flex-wrap gap-4 justify-center md:justify-start mb-8"
             >
-              <Mail className="w-5 h-5" />
-            </a>
+              <Button
+                size="lg"
+                className="bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-100 gap-2"
+                onClick={scrollToContact}
+              >
+                Связаться
+                <ArrowRight className="w-5 h-5" />
+              </Button>
+            </motion.div>
+
+            {/* Social Links */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="flex justify-center md:justify-start gap-4"
+            >
+              <motion.a
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                whileHover={{ scale: 1.2, rotate: 5 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Github className="w-5 h-5" />
+              </motion.a>
+              <motion.a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                whileHover={{ scale: 1.2, rotate: 5 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Linkedin className="w-5 h-5" />
+              </motion.a>
+              <motion.a
+                href="mailto:example@email.com"
+                className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                whileHover={{ scale: 1.2, rotate: 5 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Mail className="w-5 h-5" />
+              </motion.a>
+            </motion.div>
           </div>
         </div>
       </div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.6,
+          delay: 1,
+        }}
+      >
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{
+            duration: 1.5,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+          className="w-6 h-10 rounded-full border-2 border-gray-300 dark:border-gray-700 flex items-start justify-center p-2"
+        >
+          <motion.div
+            className="w-1.5 h-1.5 bg-gray-400 dark:bg-gray-600 rounded-full"
+            animate={{ y: [0, 12, 0] }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          />
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

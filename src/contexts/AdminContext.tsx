@@ -24,6 +24,7 @@ interface SkillCategory {
 interface AboutData {
   name: string;
   age: number;
+  profilePhoto: string;
   description: string[];
   stats: {
     age: number;
@@ -117,6 +118,7 @@ const initialSkillCategories: SkillCategory[] = [
 const initialAboutData: AboutData = {
   name: "Тимур",
   age: 23,
+  profilePhoto: "",
   description: [
     "Мне 23 года, и я backend разработчик, специализирующийся на построении высокопроизводительных серверных приложений.",
     "Работаю преимущественно с Python и PostgreSQL, разрабатывая RESTful API и микросервисные архитектуры.",
