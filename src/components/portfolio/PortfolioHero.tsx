@@ -28,7 +28,7 @@ export function PortfolioHero() {
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
+            transition={{ duration: 0.8, delay: 0.8, ease: 'easeOut' }}
             className="relative"
           >
             {/* Glow Effect Behind Photo */}
@@ -57,6 +57,7 @@ export function PortfolioHero() {
               }}
               transition={{
                 duration: 3,
+                delay: 0.8,
                 repeat: Infinity,
                 ease: 'easeInOut',
               }}
@@ -69,9 +70,9 @@ export function PortfolioHero() {
               }}
               transition={{
                 duration: 3,
+                delay: 0.8,
                 repeat: Infinity,
                 ease: 'easeInOut',
-                delay: 0.5,
               }}
             />
           </motion.div>
@@ -81,7 +82,7 @@ export function PortfolioHero() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
               className="mb-3"
             >
               <span className="text-gray-500 dark:text-gray-400">Backend Developer</span>
@@ -90,7 +91,7 @@ export function PortfolioHero() {
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
               className="mb-4 text-gray-900 dark:text-white"
             >
               {aboutData.name}
@@ -99,7 +100,7 @@ export function PortfolioHero() {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
               className="text-gray-600 dark:text-gray-400 mb-6 max-w-xl"
             >
               {aboutData.description[0]}
@@ -108,7 +109,7 @@ export function PortfolioHero() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
               className="flex flex-wrap gap-4 justify-center md:justify-start mb-8"
             >
               <Button
@@ -125,7 +126,7 @@ export function PortfolioHero() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
               className="flex justify-center md:justify-start gap-4"
             >
               <motion.a

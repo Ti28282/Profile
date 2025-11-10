@@ -28,7 +28,7 @@ export function Skills() {
               className="w-12 h-0.5 bg-gray-900 dark:bg-white"
               initial={{ width: 0 }}
               animate={isInView ? { width: 48 } : { width: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.8, }}
             />
           </motion.div>
 

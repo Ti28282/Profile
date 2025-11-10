@@ -20,7 +20,7 @@ export function About() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
             className="mb-12"
           >
             <h2 className="mb-4 text-gray-900 dark:text-white">О себе</h2>
@@ -28,7 +28,7 @@ export function About() {
               className="w-12 h-0.5 bg-gray-900 dark:bg-white"
               initial={{ width: 0 }}
               animate={isInView ? { width: 48 } : { width: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
             />
           </motion.div>
 
@@ -39,7 +39,7 @@ export function About() {
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
                 className="leading-relaxed"
               >
                 {paragraph}
@@ -51,7 +51,7 @@ export function About() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-12 border-t border-gray-200 dark:border-gray-800"
           >
             {[
@@ -64,7 +64,7 @@ export function About() {
                 key={index}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
+                transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
                 whileHover={{ scale: 1.05 }}
               >
                 <div className="text-gray-900 dark:text-white mb-1">

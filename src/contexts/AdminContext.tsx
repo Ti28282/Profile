@@ -43,6 +43,15 @@ interface Message {
   read: boolean;
 }
 
+interface IMyInfo {
+
+  email: string;
+  github: string;
+  telegram: string;
+  whatsapp: string;
+
+}
+
 interface AdminContextType {
   isAuthenticated: boolean;
   login: (password: string) => boolean;
@@ -58,9 +67,18 @@ interface AdminContextType {
   messages: Message[];
   markMessageAsRead: (id: number) => void;
   deleteMessage: (id: number) => void;
+  initialMyinfo: IMyInfo; 
 }
 
 const AdminContext = createContext<AdminContextType | undefined>(undefined);
+
+const initialMyinfo: IMyInfo = {
+  email: "sabirovt50@gmail.com",
+  github: "https://github.com/Ti28282",
+  telegram: "https://t.me/timurtksI",
+  whatsapp: "https://wa.me/79179090362"
+}
+
 
 // Mock data
 const initialProjects: Project[] = [
@@ -79,13 +97,13 @@ const initialProjects: Project[] = [
     description: "Backend для обработки и анализа больших объемов данных с real-time агрегацией",
     image: "https://images.unsplash.com/photo-1620722664104-d4b8a0c5b556?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkYXRhYmFzZSUyMHBvc3RncmVzcWx8ZW58MXx8fHwxNzYwODc4MjU3fDA&ixlib=rb-4.1.0&q=80&w=1080",
     tags: ["Python", "Django", "PostgreSQL", "Celery"],
-    liveUrl: "#",
+    liveUrl: "#", 
     githubUrl: "#"
   },
   {
     id: 3,
     title: "Микросервисная архитектура",
-    description: "Распределенная сист��ма из 6+ микросервисов с message broker и service discovery",
+    description: "Распределенная систeма из 6+ микросервисов с message broker и service discovery",
     image: "https://images.unsplash.com/photo-1676030789467-a097e2291bb2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtaWNyb3NlcnZpY2VzJTIwYXJjaGl0ZWN0dXJlfGVufDF8fHx8MTc2MDg3ODI1N3ww&ixlib=rb-4.1.0&q=80&w=1080",
     tags: ["Python", "Docker", "RabbitMQ", "Kubernetes"],
     liveUrl: "#",

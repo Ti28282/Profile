@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github,  Mail, Send } from "lucide-react";
 
 export function PortfolioFooter() {
   const currentYear = new Date().getFullYear();
@@ -21,7 +21,7 @@ export function PortfolioFooter() {
             {/* Social Links */}
             <div className="flex gap-6">
               <a
-                href="https://github.com"
+                href="https://github.com/Ti28282"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
@@ -29,15 +29,16 @@ export function PortfolioFooter() {
                 <Github className="w-5 h-5" />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://tg"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
               >
-                <Linkedin className="w-5 h-5" />
+          
+                <Send className = "w-5 h-5" />
               </a>
               <a
-                href="mailto:example@email.com"
+                href="mailto:sabirovt50@gmail.com"
                 className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
               >
                 <Mail className="w-5 h-5" />

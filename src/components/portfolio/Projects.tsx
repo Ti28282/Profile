@@ -22,7 +22,7 @@ export function Projects() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
             className="mb-12"
           >
             <h2 className="mb-4 text-gray-900 dark:text-white">Работы</h2>
@@ -30,7 +30,7 @@ export function Projects() {
               className="w-12 h-0.5 bg-gray-900 dark:bg-white"
               initial={{ width: 0 }}
               animate={isInView ? { width: 48 } : { width: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
             />
           </motion.div>
 

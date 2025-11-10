@@ -4,11 +4,13 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import { toast } from "sonner@2.0.3";
-import { Mail, Github, Linkedin } from "lucide-react";
+import { Mail, Github, Send, MessageCircle } from "lucide-react";
+import { useAdmin } from "../../contexts/AdminContext";
 import { motion } from 'motion/react';
 import { useInView } from 'motion/react';
 
 export function Contact() {
+  const { initialMyinfo } = useAdmin();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -42,7 +44,7 @@ export function Contact() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
             className="mb-12"
           >
             <h2 className="mb-4 text-gray-900 dark:text-white">Контакты</h2>
@@ -50,12 +52,12 @@ export function Contact() {
               className="w-12 h-0.5 bg-gray-900 dark:bg-white mb-6"
               initial={{ width: 0 }}
               animate={isInView ? { width: 48 } : { width: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
             />
             <motion.p
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
               className="text-gray-600 dark:text-gray-400"
             >
               Свяжитесь со мной для обсуждения проекта или сотрудничества
@@ -69,7 +71,7 @@ export function Contact() {
               className="space-y-6"
               initial={{ opacity: 0, x: -30 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
             >
               <div>
                 <Label htmlFor="name" className="text-gray-900 dark:text-white">Имя</Label>
@@ -121,7 +123,7 @@ export function Contact() {
               className="space-y-8"
               initial={{ opacity: 0, x: 30 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
             >
               <div>
                 <h3 className="text-gray-900 dark:text-white mb-4">
@@ -136,8 +138,9 @@ export function Contact() {
                     <Mail className="w-5 h-5" />
                     <span>example@email.com</span>
                   </motion.a>
+                  {/* Test */}
                   <motion.a
-                    href="https://github.com"
+                    href="https://github.com/" 
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
@@ -147,14 +150,24 @@ export function Contact() {
                     <span>GitHub</span>
                   </motion.a>
                   <motion.a
-                    href="https://linkedin.com"
+                    href="https://tg"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
                     whileHover={{ x: 5 }}
                   >
-                    <Linkedin className="w-5 h-5" />
-                    <span>LinkedIn</span>
+                    <Send className="w-5 h-5"/>
+                    <span>Telegram</span>
+                  </motion.a>
+                   <motion.a
+                    href="https://whastapp"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                    whileHover={{ x: 5 }}
+                  >
+                    <MessageCircle className="w-5 h-5 "/>
+                    <span>Whatsapp</span>
                   </motion.a>
                 </div>
               </div>
