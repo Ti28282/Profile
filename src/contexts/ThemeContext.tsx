@@ -11,35 +11,17 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
-    // Проверяем системную тему при загрузке
-    if (typeof window !== 'undefined') {
-      const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      return isDark ? "dark" : "light";
-    }
-    return "light";
+    const saved = localStorage.getItem("theme");
+    return (saved as Theme) || "light";
   });
 
   useEffect(() => {
-    // Слушаем изменения системной темы
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    
-    const handleChange = (e: MediaQueryListEvent) => {
-      setTheme(e.matches ? "dark" : "light");
-    };
-
-    mediaQuery.addEventListener("change", handleChange);
-    
-    return () => {
-      mediaQuery.removeEventListener("change", handleChange);
-    };
-  }, []);
-
-  useEffect(() => {
+    localStorage.setItem("theme", theme);
     document.documentElement.classList.toggle("dark", theme === "dark");
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
   return (

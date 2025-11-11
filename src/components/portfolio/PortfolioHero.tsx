@@ -1,5 +1,5 @@
 import { Button } from "../ui/button";
-import { Github, Linkedin, Mail, ArrowRight } from "lucide-react";
+import { Github, Mail, ArrowRight, MessageCircle, Phone} from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { useAdmin } from "../../contexts/AdminContext";
 import { AnimatedBackground } from "./AnimatedBackground";
@@ -147,7 +147,8 @@ export function PortfolioHero() {
                 whileHover={{ scale: 1.2, rotate: 5 }}
                 whileTap={{ scale: 0.9 }}
               >
-                <Linkedin className="w-5 h-5" />
+                <MessageCircle className="w-5 h-5" />
+                <Phone size={11} strokeWidth={3} className="phone"/>
               </motion.a>
               <motion.a
                 href="mailto:example@email.com"

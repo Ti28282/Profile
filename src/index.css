@@ -858,11 +858,15 @@
   .max-w-xl {
     max-width: var(--container-xl);
   }
-
+  
   .min-w-0 {
     min-width: calc(var(--spacing) * 0);
   }
-
+  .phone{
+    position: absolute;
+    bottom: 12.5px;
+    margin-left: 4.5px;
+  }
   .flex-1 {
     flex: 1;
   }
