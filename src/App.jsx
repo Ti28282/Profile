@@ -12,6 +12,7 @@ import { Contact } from './components/portfolio/Contact';
 import { PortfolioFooter } from './components/portfolio/PortfolioFooter';
 import { Toaster } from './components/ui/sonner';
 
+
 function AppContent() {
   const [isAdminRoute, setIsAdminRoute] = useState(false);
   const { isAuthenticated } = useAdmin();

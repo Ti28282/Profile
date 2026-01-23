@@ -136,7 +136,7 @@ const initialSkillCategories: SkillCategory[] = [
 const initialAboutData: AboutData = {
   name: "Тимур",
   age: 23,
-  profilePhoto: "",
+  profilePhoto: "",//src/assets/MyPhoto.jpg
   description: [
     "Мне 23 года, и я backend разработчик, специализирующийся на построении высокопроизводительных серверных приложений.",
     "Работаю преимущественно с Python и PostgreSQL, разрабатывая RESTful API и микросервисные архитектуры.",
@@ -175,6 +175,7 @@ export function AdminProvider({ children }: { children: ReactNode }) {
   const [skillCategories, setSkillCategories] = useState<SkillCategory[]>(initialSkillCategories);
   const [aboutData, setAboutData] = useState<AboutData>(initialAboutData);
   const [messages, setMessages] = useState<Message[]>(initialMessages);
+  
 
   const login = (password: string) => {
     // Mock authentication - в реальном приложении это должно быть API запросом
@@ -240,6 +241,7 @@ export function AdminProvider({ children }: { children: ReactNode }) {
         aboutData,
         updateAboutData,
         messages,
+        initialMyinfo,
         markMessageAsRead,
         deleteMessage
       }}

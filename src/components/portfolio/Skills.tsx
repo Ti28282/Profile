@@ -16,7 +16,7 @@ export function Skills() {
     >
       <div className="container mx-auto px-6">
         <div className="max-w-3xl mx-auto">
-          {/* Section Header */}
+          
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -32,7 +32,7 @@ export function Skills() {
             />
           </motion.div>
 
-          {/* Skills Grid */}
+          
           <div className="space-y-12">
             {skillCategories.map((category, idx) => (
               <motion.div

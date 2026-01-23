@@ -2587,6 +2587,11 @@
 
 html {
   font-size: var(--font-size);
+  
+}
+
+.icon_wrapper {
+  background-color: #000000
 }
 
 @property --tw-translate-x {

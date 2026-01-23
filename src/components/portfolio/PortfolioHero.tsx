@@ -1,12 +1,12 @@
 import { Button } from "../ui/button";
-import { Github, Mail, ArrowRight, MessageCircle, Phone} from "lucide-react";
+import { Github, Mail, ArrowRight, MessageCircle, Phone, Send} from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { useAdmin } from "../../contexts/AdminContext";
 import { AnimatedBackground } from "./AnimatedBackground";
 import { motion } from 'motion/react';
 
 export function PortfolioHero() {
-  const { aboutData } = useAdmin();
+  const { aboutData, initialMyinfo } = useAdmin();
 
   const scrollToContact = () => {
     const element = document.getElementById("contact");
@@ -31,7 +31,7 @@ export function PortfolioHero() {
             transition={{ duration: 0.8, delay: 0.8, ease: 'easeOut' }}
             className="relative"
           >
-            {/* Glow Effect Behind Photo */}
+            
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-3xl scale-110" />
             
             <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-2 border-gray-200 dark:border-gray-800 shadow-2xl">
@@ -48,7 +48,7 @@ export function PortfolioHero() {
               )}
             </div>
 
-            {/* Floating Ring Animation */}
+            
             <motion.div
               className="absolute inset-0 rounded-full border-2 border-blue-500/30 dark:border-blue-400/30"
               animate={{
@@ -77,7 +77,7 @@ export function PortfolioHero() {
             />
           </motion.div>
 
-          {/* Right: Content */}
+          
           <div className="flex-1 text-center md:text-left">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -122,7 +122,7 @@ export function PortfolioHero() {
               </Button>
             </motion.div>
 
-            {/* Social Links */}
+            
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -130,7 +130,7 @@ export function PortfolioHero() {
               className="flex justify-center md:justify-start gap-4"
             >
               <motion.a
-                href="https://github.com"
+                href={initialMyinfo.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
@@ -139,8 +139,20 @@ export function PortfolioHero() {
               >
                 <Github className="w-5 h-5" />
               </motion.a>
+              
               <motion.a
-                href="https://linkedin.com"
+                href={initialMyinfo.telegram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                whileHover={{ scale: 1.2, rotate: 5 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                
+                <Send className="w-5 h-5" />
+              </motion.a>
+              <motion.a
+                href={initialMyinfo.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
@@ -151,7 +163,7 @@ export function PortfolioHero() {
                 <Phone size={11} strokeWidth={3} className="phone"/>
               </motion.a>
               <motion.a
-                href="mailto:example@email.com"
+                href={`mailto:${initialMyinfo.email}`}
                 className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
                 whileHover={{ scale: 1.2, rotate: 5 }}
                 whileTap={{ scale: 0.9 }}
@@ -163,7 +175,7 @@ export function PortfolioHero() {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+      
       <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
         initial={{ opacity: 0, y: -20 }}

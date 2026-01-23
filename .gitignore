@@ -4,3 +4,7 @@ docker
 backend
 .vite
 initdb
+__pycache__
+.coverage
+htmlcov
+.env

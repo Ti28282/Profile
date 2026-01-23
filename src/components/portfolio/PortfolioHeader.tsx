@@ -17,12 +17,12 @@ export function PortfolioHeader() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-gray-950/90 backdrop-blur-sm border-b border-gray-100 dark:border-gray-800 transition-colors">
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
+          
           <a href="#hero" className="text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
             Тимур
           </a>
 
-          {/* Desktop Navigation */}
+          
           <nav className="hidden md:flex items-center gap-8">
             <button
               onClick={() => scrollToSection("about")}
@@ -50,7 +50,7 @@ export function PortfolioHeader() {
             </button>
           </nav>
 
-          {/* Actions */}
+          
           <div className="flex items-center gap-3">
             <Button
               variant="ghost"
@@ -59,13 +59,13 @@ export function PortfolioHeader() {
               className="rounded-full"
             >
               {theme === "light" ? (
-                <Moon className="w-5 h-5" />
+                <Moon className="icon-wrapper w-5 h-5" />
               ) : (
-                <Sun className="w-5 h-5" />
+                <Sun className="w-5 h-5"/>
               )}
             </Button>
 
-            {/* Mobile Menu Button */}
+            
             <button
               className="md:hidden p-2"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -79,7 +79,7 @@ export function PortfolioHeader() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        
         {isMenuOpen && (
           <nav className="md:hidden mt-6 pb-4 flex flex-col gap-4 border-t border-gray-100 dark:border-gray-800 pt-4">
             <button

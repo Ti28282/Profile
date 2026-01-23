@@ -18,7 +18,7 @@ export function Projects() {
     >
       <div className="container mx-auto px-6">
         <div className="max-w-5xl mx-auto">
-          {/* Section Header */}
+          
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -34,7 +34,7 @@ export function Projects() {
             />
           </motion.div>
 
-          {/* Projects Grid */}
+          
           <div className="grid md:grid-cols-2 gap-8">
             {projects.map((project, index) => (
               <motion.div
@@ -45,7 +45,7 @@ export function Projects() {
                 whileHover={{ y: -8 }}
                 className="group bg-white dark:bg-gray-950 border border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 transition-all overflow-hidden"
               >
-                {/* Image */}
+                
                 <div className="relative h-56 overflow-hidden bg-gray-100 dark:bg-gray-800">
                   <ImageWithFallback
                     src={project.image}
@@ -53,7 +53,7 @@ export function Projects() {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   
-                  {/* Overlay with links */}
+                  
                   <motion.div
                     className="absolute inset-0 bg-gray-900/80 flex items-center justify-center gap-4"
                     initial={{ opacity: 0 }}
@@ -87,7 +87,7 @@ export function Projects() {
                   </motion.div>
                 </div>
 
-                {/* Content */}
+                
                 <div className="p-6">
                   <h3 className="text-gray-900 dark:text-white mb-2">
                     {project.title}
@@ -96,7 +96,7 @@ export function Projects() {
                     {project.description}
                   </p>
 
-                  {/* Tags */}
+                  
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag, idx) => (
                       <span

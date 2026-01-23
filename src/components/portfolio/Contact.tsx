@@ -9,6 +9,7 @@ import { useAdmin } from "../../contexts/AdminContext";
 import { motion } from 'motion/react';
 import { useInView } from 'motion/react';
 
+
 export function Contact() {
   const { initialMyinfo } = useAdmin();
   const [formData, setFormData] = useState({
@@ -131,16 +132,16 @@ export function Contact() {
                 </h3>
                 <div className="space-y-4">
                   <motion.a
-                    href="mailto:example@email.com"
+                    href={`mailto:${initialMyinfo.email}`}
                     className="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
                     whileHover={{ x: 5 }}
                   >
                     <Mail className="w-5 h-5" />
-                    <span>example@email.com</span>
+                    <span>{initialMyinfo.email}</span>
                   </motion.a>
                   {/* Test */}
                   <motion.a
-                    href="https://github.com/" 
+                    href={initialMyinfo.github} 
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
@@ -150,7 +151,7 @@ export function Contact() {
                     <span>GitHub</span>
                   </motion.a>
                   <motion.a
-                    href="https://tg"
+                    href={initialMyinfo.telegram}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
@@ -160,7 +161,7 @@ export function Contact() {
                     <span>Telegram</span>
                   </motion.a>
                    <motion.a
-                    href="https://whastapp"
+                    href={initialMyinfo.whatsapp}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
