@@ -11,6 +11,8 @@ import { Projects } from './components/portfolio/Projects';
 import { Contact } from './components/portfolio/Contact';
 import { PortfolioFooter } from './components/portfolio/PortfolioFooter';
 import { Toaster } from './components/ui/sonner';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 
 
 function AppContent() {
@@ -55,8 +57,10 @@ function AppContent() {
 
   // Показываем портфолио
   return (
+    
     <div className="min-h-screen bg-white dark:bg-gray-900">
       <PortfolioHeader />
+      
       <main>
         <PortfolioHero />
         <About />
@@ -71,11 +75,15 @@ function AppContent() {
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <AdminProvider>
-        <AppContent />
-        <Toaster />
-      </AdminProvider>
-    </ThemeProvider>
+    <AdminProvider>
+      <BrowserRouter>
+        <ThemeProvider>
+            <Routes>
+                <Route path="/" element={<AppContent />} />
+                <Route path="/admin" element={<AdminPanel />} />
+            </Routes>
+        </ThemeProvider>
+      </BrowserRouter>
+    </AdminProvider>
   );
 }

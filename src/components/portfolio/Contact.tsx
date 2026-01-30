@@ -27,7 +27,9 @@ export function Contact() {
 
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1500));
-
+    // API MESSAGE
+    // 192.168.101.100/message/send POST
+    // 
     toast.success("Сообщение отправлено!");
     setFormData({ name: "", email: "", message: "" });
     setIsSubmitting(false);
